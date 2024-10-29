@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-app-client-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blog-app-client
+  template:
+    metadata:
+      labels:
+        app: blog-app-client
+    spec:
+      containers:
+        - name: blog-app-client
+          image: blog-client:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 80
